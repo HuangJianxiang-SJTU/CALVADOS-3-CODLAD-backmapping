@@ -12,11 +12,11 @@ import numpy as np
 import pandas as pd
 from scipy.stats import ks_2samp
 
-PROJECT = '../'
+PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
 OUT = os.path.join(PROJECT, 'logs/figure3_step100')
 FIG2_OUT = os.path.join(PROJECT, 'logs/figure2_step100')
 
-with open(os.path.join(PROJECT, 'dataset-26-5-10/clean_v5.csv')) as f:
+with open(os.path.join(PROJECT, 'dataset/clean_v5.csv')) as f:
     CLEAN_V5 = sorted({r['ped_id'] for r in csv.DictReader(f)})
 
 RAMA_CATS = ['general', 'glycine', 'pre_proline', 'trans_proline', 'cis_proline', 'ile_val']

@@ -7,11 +7,11 @@ import os, sys, json, csv
 import numpy as np
 import pandas as pd
 
-PROJECT = '../'
+PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
 OUT = os.path.join(PROJECT, 'logs/figure2_step100')
 
 # Load clean_v5 system list
-with open(os.path.join(PROJECT, 'dataset-26-5-10/clean_v5.csv')) as f:
+with open(os.path.join(PROJECT, 'dataset/clean_v5.csv')) as f:
     CLEAN_V5 = sorted({r['ped_id'] for r in csv.DictReader(f)})
 
 RAMA_CATS = ['general', 'glycine', 'pre_proline', 'trans_proline', 'cis_proline', 'ile_val']
