@@ -15,7 +15,7 @@ Runs PDBFixer + DSSP in parallel, then aggregates.
 import os, sys, warnings, time, pickle, io
 warnings.filterwarnings("ignore")
 
-os.chdir('/MDdata/data04/jxhuang/cg_cascade')
+os.chdir('../')
 sys.path.insert(0, 'src/CODLAD')
 sys.path.insert(0, 'src')
 sys.path.insert(0, 'src/cascade_codlad/eval_ensemble')
