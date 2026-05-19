@@ -7,7 +7,7 @@ import os, sys, json, csv
 import numpy as np
 import pandas as pd
 
-PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
+PROJECT = '../'
 OUT = os.path.join(PROJECT, 'logs/figure2_step100')
 
 # Load clean_v5 system list
