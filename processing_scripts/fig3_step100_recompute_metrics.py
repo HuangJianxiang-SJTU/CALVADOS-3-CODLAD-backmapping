@@ -7,7 +7,7 @@ import pandas as pd
 import mdtraj as md
 from collections import defaultdict
 
-PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
+PROJECT = '../'
 sys.path.insert(0, os.path.join(PROJECT, 'src/cascade_codlad/eval_ensemble'))
 from metrics_ramachandran import _in_boxes, _get_region_boxes
 
