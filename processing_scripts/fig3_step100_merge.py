@@ -12,7 +12,7 @@ import numpy as np
 import pandas as pd
 from scipy.stats import ks_2samp
 
-PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
+PROJECT = '../'
 OUT = os.path.join(PROJECT, 'logs/figure3_step100')
 FIG2_OUT = os.path.join(PROJECT, 'logs/figure2_step100')
 
