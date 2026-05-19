@@ -1,7 +1,6 @@
 # CALVADOS-3 / CODLAD Backmapping Pipeline
 
-Reproducible figure generation for the manuscript *"AI-Driven Multi-Scale Reconstruction of
-Protein Ensembles: Bridging Coarse-Grained Dynamics with Generative All-Atom Models"*.
+Reproducible figure generation for the manuscript *"Local Geometry Recovers but Cooperative Structure Does Not: Residue-Resolved Limits of All-Atom Reconstruction from Single-Bead Coarse-Grained Disordered Protein Ensembles"*.
 
 This repository contains plotting scripts, data-processing scripts, intermediate CSVs, cached
 backmapped conformations, and the final manuscript figure PDFs. All figures can be regenerated
