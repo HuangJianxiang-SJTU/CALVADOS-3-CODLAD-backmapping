@@ -120,13 +120,16 @@ def panel_c_js_divergence(ax):
     total    = df_ordered['JS_total'].values
     cg_attr  = df_ordered['JS_cg'].values
 
-    ax.bar(x - w, pipeline, w, color=C_NEUTRAL, alpha=0.85, label='Pipeline JS')
-    ax.bar(x,      total,    w, color=C_PED_REF, alpha=0.85, label='Total JS')
-    ax.bar(x + w,  cg_attr,  w, color=C_CG_CODLAD, alpha=0.85, label='CG-attributable JS')
+    ax.bar(x - w, pipeline, w, color=C_NEUTRAL, alpha=0.85,
+           label='JS(PED+CODLAD, PED ref.)')
+    ax.bar(x,      total,    w, color=C_PED_REF, alpha=0.85,
+           label='JS(CG+CODLAD, PED ref.)')
+    ax.bar(x + w,  cg_attr,  w, color=C_CG_CODLAD, alpha=0.85,
+           label=r'$\Delta JS_\mathrm{CG}$ = total - pipeline')
 
     ax.set_xticks(x)
     ax.set_xticklabels(class_order, rotation=30, ha='right', fontsize=12)
-    ax.set_ylabel('JS divergence')
+    ax.set_ylabel('JS divergence / increment')
     ax.set_ylim(0, 0.52)
     ax.legend(fontsize=11, loc='upper left')
     ax.tick_params(labelsize=14)

@@ -1,0 +1,24 @@
+ped_id,experimental_group,ped_metadata_flags,n_models,title,annotation_note
+PED00003,NMR-supported,NMR; PRE,575,Structural ensemble of beta-synuclein (1-134),PED metadata: NMR/PRE
+PED00006,NMR-supported,NMR; PRE,576,Structural ensemble of hybrid beta synuclein G25E (1-72); alpha synuclein (73-83); beta synuclein (73-134),PED metadata: NMR/PRE
+PED00016,NMR-supported,NMR; SAXS; chemical shifts; RDC,4939,Structural ensemble of p15PAF (2-111),"PED API: NMR chemical shifts, relaxation and RDC; SAXS flag also present"
+PED00074,NMR-supported,NMR,81,Structural ensemble of HIV-1 transmembrane protein gp41 2F5 mAb epitope (659-671),PED metadata: NMR
+PED00154,NMR-supported,NMR; chemical shifts; RDC,1000,Structure and dynamics of the MKK4,PED metadata: NMR chemical shifts/RDC
+PED00181,NMR-supported,NMR; SAXS; chemical shifts; RDC,1000,Structural ensemble of N-WASP domain V by MD simulation and SAXS data,PED metadata: NMR+SAXS; grouped by NMR-supported restraints
+PED00184,NMR-supported,NMR; RDC,500,NMR RDC-refined ensemble of Tif2 NRID,PED metadata: NMR RDC
+PED00229,NMR-supported,NMR; SAXS; chemical shifts,500,"Refined ensemble of p53-TAD1 characterized by CD, SAXS and NMR","PED metadata/title: CD, SAXS and NMR"
+PED00231,NMR-supported,NMR; SAXS; chemical shifts,500,"Refined ensemble of an RS-repeat peptide characterized by CD, SAXS and NMR","PED metadata/title: CD, SAXS and NMR"
+PED00233,NMR-supported,NMR; SAXS; chemical shifts,200,"Refined ensemble of MeV-Ntail characterized by CD, SAXS and NMR","PED metadata/title: CD, SAXS and NMR"
+PED00238,NMR-supported,NMR; SAXS; chemical shifts,500,Refined ensemble of an RS-repeat peptide characterized by SAXS and NMR,PED metadata/title: SAXS and NMR
+PED00536,NMR-supported,NMR; SAXS; PRE; chemical shifts; RDC,2998,Structural ensemble of ACTR [a99SBdisp (reweighted)],"PED metadata: NMR/SAXS/PRE/RDC, reweighted MD"
+PED00140,SAXS-only,SAXS,8,"Structural ensemble of abcissic acid stress ripening of durum wheat, TtASR1, full length",PED API: SAXS experimental procedure
+PED00141,SAXS-only,SAXS,6,"Structural ensemble of abcissic acid stress ripening of barley, HvASR1, full length",PED API: SAXS experimental procedure
+PED00155,SAXS-only,SAXS,1800,Structural ensemble of Histatin-5 (Histatin-3 peptide (20-43)) ,PED metadata: SAXS
+PED00183,SAXS-only,SAXS,12,SAXS-based ensemble of the full-length Nipah virus V protein,PED API/title: SAXS-based ensemble
+PED00493,EPR/DEER,none in local PED inventory,2102,Ensemble Structure of the N-terminal Domain (1-267) of FUS in the condensed state,PED API: pulsed EPR/DEER experimental procedure
+PED00494,EPR/DEER,none in local PED inventory,551,Ensemble Structure of the N-terminal Domain (1-267) of FUS in the dispersed state,PED API: pulsed EPR/DEER experimental procedure
+PED00495,EPR/DEER,none in local PED inventory,181,Ensemble Structure of the N-terminal Domain (1-267) of FUS in the denatured state,PED API: pulsed EPR/DEER experimental procedure
+PED00442,idpGAN/CG-derived,none in local PED inventory,1000,Structural ensemble of the PNT3 region (aa 200-310) of the Hendra virus V or P or W protein via the idpGAN machine learn,Official PED API: no experimental data integrated; idpGAN trained on COCOMO CG simulations; cg2all reconstruction and AMBER/OpenMM minimization; sequence from PED00203
+PED00468,idpGAN/CG-derived,none in local PED inventory,1000,Structural ensemble of synthetic peptides patterned on the first membrane span of normal human band 3 (389-430) via the ,Official PED API: no experimental data integrated; idpGAN trained on COCOMO CG simulations; cg2all reconstruction and AMBER/OpenMM minimization; sequence from PED00119
+PED00483,idpGAN/CG-derived,none in local PED inventory,100,"Structural ensemble of Nucleocapsid of murine respirovirus, 458-510, with three HID modifications and ACE and NME cappin",Official PED API: no experimental data integrated; idpGAN trained on COCOMO CG simulations; cg2all reconstruction and AMBER/OpenMM minimization; sequence from PED00011
+PED00484,idpGAN/CG-derived,none in local PED inventory,100,Structural ensemble of hybrid beta synuclein G25E (1-72); alpha synuclein (73-83); beta synuclein (73-134) via the idpGA,Official PED API: no experimental data integrated; idpGAN trained on COCOMO CG simulations; cg2all reconstruction and AMBER/OpenMM minimization; sequence from PED00006

@@ -1,0 +1,6 @@
+system,ped_id,bmrb_id,bmrb_verified,ped_xref,notes
+Beta-synuclein,PED00003,15298,True,False,BMRB verified as beta-synuclein; PED API has no BMRB xref but BMRB entry confirms protein
+p15PAF,PED00016,19332,True,True,PED API xref matches; BMRB entry confirmed
+Tif2 NRID,PED00184,50477,True,True,PED API xref matches; BMRB entry confirmed
+p53-TAD1,PED00229,17760,True,True,PED API xref matches; BMRB entry confirmed (p53 transactivation domain)
+ACTR,PED00536,15397,True,True,PED API xref matches; BMRB entry confirmed

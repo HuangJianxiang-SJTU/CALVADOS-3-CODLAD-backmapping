@@ -113,6 +113,23 @@ These scripts generate the CSV files consumed by the plotting scripts. Run them 
 
 ---
 
+
+### Revision and Rebuttal Additions
+
+The revised JCIM response adds reproducibility assets beyond the original five main/supplementary plotting scripts. New rebuttal figures and tables are stored under `manuscript/figures/` and `manuscript/tables/`, with generation scripts in `scripts/figures/`, `scripts/pulchra_backmapping/`, `scripts/aim1_cg_sampling/`, and `scripts/folded_pilot_benchmark.py`.
+
+| Output | Script / Data Source | Purpose |
+|--------|----------------------|---------|
+| `manuscript/figures/experimental_method_stratification_rebuttal.*` | `scripts/figures/fig_experimental_method_stratification.py` | Provenance-stratified PED analysis for Supplementary Figure S1 |
+| `manuscript/figures/pulchra_vs_codlad_rebuttal.*` | `scripts/figures/fig_pulchra_vs_codlad.py`; `logs/pulchra_{ped,cg}/per_system_summary.csv` | PULCHRA versus CODLAD reconstruction-method comparison for Supplementary Figure S6 |
+| `manuscript/figures/phase_diagram_CG_ergodicity_rebuttal.*` | `scripts/aim1_cg_sampling/cocomo/plot_ergodicity_phase_diagram.py` | Alternative CG force-field sampling/ergodicity assessment for Supplementary Figure S7 |
+| `manuscript/figures/folded_pilot_rebuttal.*` | `scripts/folded_pilot_benchmark.py`; `logs/folded_pilot_rebuttal/folded_pilot_per_condition_summary.csv` | Folded-domain pilot benchmark for Supplementary Figure S8 |
+| `manuscript/figures/clash_length_compactness_rebuttal.*` | `scripts/figures/fig_clash_length_compactness_rebuttal.py` | Chain-length/compactness dependence of clash counts |
+
+The PULCHRA source archive and source files used for the classical backmapping comparison are included under `src/pulchra/`. OpenABC/Mpipi/MOFF2 and COCOMO2 helper scripts used for the alternative-CG feasibility assessment are included under `scripts/aim1_cg_sampling/`. Large trajectory products and full PULCHRA per-frame caches are not committed; the committed summary CSVs are sufficient to regenerate the submitted rebuttal figures.
+
+---
+
 ## Reproduction Workflow
 
 All commands assume the repository root as the working directory. Scripts reference paths via a

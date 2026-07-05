@@ -51,7 +51,7 @@ plt.rcParams.update({
 })
 
 # Colorblind-safe palette (Wong, 2011)
-C_GT   = '#0072B2'   # Blue — Ground truth
+C_GT   = '#0072B2'   # Blue — PED reference
 C_PRED = '#D55E00'   # Vermillion — Predicted
 C_HIST = '#009E73'   # Green — Distributions / sidechain
 REF_COLOR = '#999999'
@@ -114,7 +114,7 @@ def plot_main_figure(df, summary, sc_type):
     lim = [0, max(gt[mask].max(), pred[mask].max()) * 1.05]
     ax.plot(lim, lim, '--', color=REF_COLOR, lw=1)
     ax.set_xlim(lim); ax.set_ylim(lim)
-    ax.set_xlabel(r'Ground truth $R_\mathrm{g}$ ($\mathrm{\AA}$)')
+    ax.set_xlabel(r'PED reference $R_\mathrm{g}$ ($\mathrm{\AA}$)')
     ax.set_ylabel(r'Pred $R_\mathrm{g}$ ($\mathrm{\AA}$)')
     delta = np.abs(pred[mask] - gt[mask]).mean()
     rel = (np.abs(pred[mask] - gt[mask]) / gt[mask]).mean() * 100
@@ -131,7 +131,7 @@ def plot_main_figure(df, summary, sc_type):
         pred_fav = summary['rota_favored_pct_pred'].mean() if 'rota_favored_pct_pred' in summary.columns else 0
         gt_rota.append(gt_fav); pred_rota.append(pred_fav)
     x = np.arange(len(cat_names))
-    ax.bar(x - w/2, gt_rota, w, color=C_GT, alpha=0.85, label='Ground truth')
+    ax.bar(x - w/2, gt_rota, w, color=C_GT, alpha=0.85, label='PED reference')
     ax.bar(x + w/2, pred_rota, w, color=C_PRED, alpha=0.85, label='Predicted')
     ax.set_xticks(x); ax.set_xticklabels(cat_names, rotation=30, ha='right')
     ax.set_ylabel('Favoured (%)'); ax.set_ylim(0, 110)
@@ -148,7 +148,7 @@ def plot_main_figure(df, summary, sc_type):
         sub = summary[summary['ped_id'] == ped_id]
         gt_clash.append(sub['clash_gt_mean'].values[0] if len(sub) else 0)
         pred_clash.append(sub['clash_pred_mean'].values[0] if len(sub) else 0)
-    ax.bar(x - w/2, gt_clash, w, color=C_GT, alpha=0.85, label='Ground truth')
+    ax.bar(x - w/2, gt_clash, w, color=C_GT, alpha=0.85, label='PED reference')
     ax.bar(x + w/2, pred_clash, w, color=C_PRED, alpha=0.85, label='Predicted')
     ax.set_xticks(x); ax.set_xticklabels(systems, rotation=45, ha='right', fontsize=9)
     ax.set_ylabel('Clash count')
@@ -196,7 +196,7 @@ def plot_supplementary(df, summary, bond):
     lim = [0, max(gt[mask].max(), pred[mask].max()) * 1.1]
     ax.plot(lim, lim, '--', color=REF_COLOR, lw=1)
     ax.set_xlim(lim); ax.set_ylim(lim)
-    ax.set_xlabel(r'Ground truth C$\beta$ ($\mathrm{\AA}$)')
+    ax.set_xlabel(r'PED reference C$\beta$ ($\mathrm{\AA}$)')
     ax.set_ylabel(r'Pred C$\beta$ ($\mathrm{\AA}$)')
     setup_ax(ax)
 
@@ -246,7 +246,7 @@ def plot_supplementary(df, summary, bond):
     lim = [0, max(gt[mask].max(), pred[mask].max()) * 1.05]
     ax.plot(lim, lim, '--', color=REF_COLOR, lw=1)
     ax.set_xlim(lim); ax.set_ylim(lim)
-    ax.set_xlabel(r'Ground truth $D_\mathrm{max}$ ($\mathrm{\AA}$)')
+    ax.set_xlabel(r'PED reference $D_\mathrm{max}$ ($\mathrm{\AA}$)')
     ax.set_ylabel(r'Pred $D_\mathrm{max}$ ($\mathrm{\AA}$)')
     delta = np.abs(pred[mask] - gt[mask]).mean()
     rel = (np.abs(pred[mask] - gt[mask]) / gt[mask]).mean() * 100
@@ -262,7 +262,7 @@ def plot_supplementary(df, summary, bond):
     ax.scatter(gt_h[mask], pred_h[mask], s=1, alpha=0.15, c=C_PRED, rasterized=True)
     ax.plot([0, 1], [0, 1], '--', color=REF_COLOR, lw=1)
     ax.set_xlim(0, 1); ax.set_ylim(0, 1)
-    ax.set_xlabel('Ground truth helix frac'); ax.set_ylabel('Pred helix frac')
+    ax.set_xlabel('PED reference helix frac'); ax.set_ylabel('Pred helix frac')
     setup_ax(ax)
 
     for ax in axes.flat:

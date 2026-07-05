@@ -1,0 +1,23 @@
+name: openabc
+# Dedicated env for OpenABC (Mpipi + MOFF2) single-bead CG simulations.
+# Created for the JCIM revision adding Mpipi + MOFF2 to address Reviewer 1.
+# Key: conda openmm 8.5.1 bundles the CUDA platform; pin cuda-version=12.9 to
+# match driver 595.x (CUDA 13.x PTX is too new for the driver). numpy<2 because
+# the OpenMM/mdtraj wheels were built against numpy 1.x.
+# Install openabc after creating this env:
+#   /path/to/envs/openabc/bin/python -m pip install \
+#     git+https://github.com/ZhangGroup-MITChemistry/OpenABC.git
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - numpy<2
+  - cuda-version=12.9
+  - openmm=8.5.1
+  - mdtraj
+  - pandas
+  - scipy
+  - matplotlib
+  - pdbfixer
+  - biopython
+  - tqdm

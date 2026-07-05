@@ -22,11 +22,30 @@ sys.path.insert(0, 'src/cascade_codlad/eval_ensemble')
 import numpy as np, pandas as pd
 import mdtraj as md
 from collections import defaultdict
-from metrics_ramachandran import (
-    _in_boxes, _get_region_boxes,
-    compute_phi_psi_divergence, _hist2d_phi_psi,
-    _PHI_PSI_GRID_N, _PHI_PSI_GRID_RANGE, _JD_EPSILON,
-)
+from metrics_ramachandran import _in_boxes, _get_region_boxes
+
+_PHI_PSI_GRID_N = 36
+_PHI_PSI_GRID_RANGE = (-180.0, 180.0)
+_JD_EPSILON = 1e-10
+
+
+def _hist2d_phi_psi(phi, psi, n_bins=_PHI_PSI_GRID_N):
+    hist, _, _ = np.histogram2d(
+        phi,
+        psi,
+        bins=n_bins,
+        range=[_PHI_PSI_GRID_RANGE, _PHI_PSI_GRID_RANGE],
+    )
+    hist = hist.astype(float) + _JD_EPSILON
+    return hist / hist.sum()
+
+
+def compute_phi_psi_divergence(phi_pred, psi_pred, phi_ref, psi_ref):
+    p = _hist2d_phi_psi(phi_pred, psi_pred).ravel()
+    q = _hist2d_phi_psi(phi_ref, psi_ref).ravel()
+    m = 0.5 * (p + q)
+    js = 0.5 * np.sum(p * np.log(p / m)) + 0.5 * np.sum(q * np.log(q / m))
+    return {'js_divergence': float(js)}
 
 PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
 OUT = os.path.join(PROJECT, 'logs/figure3_step100')
@@ -396,7 +415,7 @@ for row_idx, (cond_name, df_cond) in enumerate(conditions):
         # JS divergence annotation
         js_result = compute_phi_psi_divergence(phi_pred, psi_pred, phi_ref, psi_ref)
         js_val = js_result['js_divergence']
-        ax.text(0.03, 0.97, f'JS = {js_val:.3f}', transform=ax.transAxes,
+        ax.text(0.03, 0.97, f'JS vs PED ref. = {js_val:.3f}', transform=ax.transAxes,
                 fontsize=10, va='top', ha='left',
                 bbox=dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.8))
 

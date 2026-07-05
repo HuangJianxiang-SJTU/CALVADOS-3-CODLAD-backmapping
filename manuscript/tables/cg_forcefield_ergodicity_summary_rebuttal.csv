@@ -1,0 +1,161 @@
+model,N,ped_id,replica,late_mean_rg_nm,source
+MOFF2,53,PED00483,0,1.83279163,clock_json_late_half_blocks
+MOFF2,53,PED00483,1,2.25026301,clock_json_late_half_blocks
+MOFF2,53,PED00483,2,2.33916901,clock_json_late_half_blocks
+MOFF2,53,PED00483,3,1.93252689,clock_json_late_half_blocks
+Mpipi,53,PED00483,0,1.88896867,clock_json_late_half_blocks
+Mpipi,53,PED00483,1,2.13292711,clock_json_late_half_blocks
+Mpipi,53,PED00483,2,1.74082503,clock_json_late_half_blocks
+Mpipi,53,PED00483,3,1.92315279,clock_json_late_half_blocks
+MOFF2,111,PED00016,0,3.14050884,clock_json_late_half_blocks
+MOFF2,111,PED00016,1,2.81238308,clock_json_late_half_blocks
+MOFF2,111,PED00016,2,3.35868868,clock_json_late_half_blocks
+MOFF2,111,PED00016,3,3.60614332,clock_json_late_half_blocks
+MOFF2,111,PED00016,4,2.65741422,clock_json_late_half_blocks
+MOFF2,111,PED00016,5,3.19277095,clock_json_late_half_blocks
+MOFF2,111,PED00016,6,2.78021886,clock_json_late_half_blocks
+MOFF2,111,PED00016,7,3.41977519,clock_json_late_half_blocks
+Mpipi,111,PED00016,0,3.50183848,clock_json_late_half_blocks
+Mpipi,111,PED00016,1,2.77927827,clock_json_late_half_blocks
+Mpipi,111,PED00016,2,3.53914820,clock_json_late_half_blocks
+Mpipi,111,PED00016,3,3.21351978,clock_json_late_half_blocks
+MOFF2,154,PED00184,0,3.04894037,clock_json_late_half_blocks
+MOFF2,154,PED00184,1,2.99869657,clock_json_late_half_blocks
+MOFF2,154,PED00184,2,3.26263669,clock_json_late_half_blocks
+MOFF2,154,PED00184,3,3.30010260,clock_json_late_half_blocks
+MOFF2,154,PED00184,4,3.93029055,clock_json_late_half_blocks
+MOFF2,154,PED00184,5,4.02829117,clock_json_late_half_blocks
+MOFF2,154,PED00184,6,5.09819346,clock_json_late_half_blocks
+MOFF2,154,PED00184,7,3.23831041,clock_json_late_half_blocks
+Mpipi,154,PED00184,0,3.62798162,clock_json_late_half_blocks
+Mpipi,154,PED00184,1,3.10067171,clock_json_late_half_blocks
+Mpipi,154,PED00184,2,2.96164043,clock_json_late_half_blocks
+Mpipi,154,PED00184,3,3.88269361,clock_json_late_half_blocks
+MOFF2,270,PED00494,0,4.73523777,clock_json_late_half_blocks
+MOFF2,270,PED00494,1,4.38507519,clock_json_late_half_blocks
+MOFF2,270,PED00494,2,4.04436382,clock_json_late_half_blocks
+MOFF2,270,PED00494,3,3.72436639,clock_json_late_half_blocks
+Mpipi,270,PED00494,0,4.20378488,clock_json_late_half_blocks
+Mpipi,270,PED00494,1,2.54265223,clock_json_late_half_blocks
+Mpipi,270,PED00494,2,3.79535340,clock_json_late_half_blocks
+Mpipi,270,PED00494,3,3.83557187,clock_json_late_half_blocks
+MOFF2,457,PED00183,0,6.10731617,clock_json_late_half_blocks
+MOFF2,457,PED00183,1,4.92214701,clock_json_late_half_blocks
+MOFF2,457,PED00183,2,4.37970668,clock_json_late_half_blocks
+MOFF2,457,PED00183,3,4.34075275,clock_json_late_half_blocks
+Mpipi,457,PED00183,0,5.96015960,clock_json_late_half_blocks
+Mpipi,457,PED00183,1,3.96751635,clock_json_late_half_blocks
+Mpipi,457,PED00183,2,4.49251955,clock_json_late_half_blocks
+Mpipi,457,PED00183,3,3.97880949,clock_json_late_half_blocks
+COCOMO2,111,PED00016,0,2.91912309,clock_json_late_half_blocks
+COCOMO2,111,PED00016,1,2.57640852,clock_json_late_half_blocks
+COCOMO2,111,PED00016,2,3.06533106,clock_json_late_half_blocks
+COCOMO2,111,PED00016,3,2.81524897,clock_json_late_half_blocks
+COCOMO2,270,PED00493,0,4.63873177,clock_json_late_half_blocks
+COCOMO2,270,PED00493,1,4.02422026,clock_json_late_half_blocks
+COCOMO2,270,PED00493,2,4.81743736,clock_json_late_half_blocks
+COCOMO2,270,PED00493,3,5.40483315,clock_json_late_half_blocks
+COCOMO2,457,PED00183,0,3.81290581,clock_json_late_half_blocks
+COCOMO2,457,PED00183,1,4.12844990,clock_json_late_half_blocks
+COCOMO2,457,PED00183,2,3.70341672,clock_json_late_half_blocks
+COCOMO2,457,PED00183,3,4.43823529,clock_json_late_half_blocks
+CALVADOS 3,53,PED00483,0,2.06880324,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,1,2.02391426,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,2,2.13387437,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,3,2.12241406,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,4,2.10598483,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,5,2.09305169,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,6,2.12630675,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,7,2.10394530,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,8,2.07370861,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,9,2.07753851,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,10,2.07053995,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,11,2.08972754,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,12,2.02150399,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,13,2.07919168,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,14,2.05217625,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,15,2.08187780,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,16,2.07485690,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,17,2.05187310,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,18,2.00882931,merged_dcd_20_segments
+CALVADOS 3,53,PED00483,19,2.10712927,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,0,2.98210040,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,1,2.99310179,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,2,2.94652537,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,3,3.04271828,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,4,2.93986319,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,5,3.01766372,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,6,3.11417667,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,7,3.11652364,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,8,3.04539254,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,9,3.07517806,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,10,2.98378379,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,11,3.13947118,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,12,2.85597164,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,13,3.05350138,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,14,3.06111272,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,15,3.09949557,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,16,2.86804416,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,17,3.06141239,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,18,2.85307090,merged_dcd_20_segments
+CALVADOS 3,111,PED00016,19,3.17628943,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,0,3.79289861,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,1,3.88962226,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,2,3.70265688,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,3,3.75887789,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,4,3.70900523,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,5,3.74625030,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,6,3.82593056,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,7,3.79406260,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,8,3.67920067,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,9,3.80896320,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,10,3.66906459,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,11,3.82301335,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,12,3.90474889,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,13,3.80418419,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,14,3.79631780,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,15,3.83767935,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,16,3.94769199,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,17,3.68096606,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,18,3.75785855,merged_dcd_20_segments
+CALVADOS 3,154,PED00184,19,3.87735736,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,0,3.75270705,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,1,3.71597533,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,2,3.81034632,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,3,3.57223381,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,4,3.77656172,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,5,3.95136794,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,6,3.88760894,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,7,3.82330944,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,8,3.85109555,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,9,3.47021873,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,10,3.65367677,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,11,3.82584225,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,12,3.70866568,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,13,3.80254783,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,14,3.79460329,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,15,3.90475249,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,16,3.91505082,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,17,3.94602262,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,18,3.91377972,merged_dcd_20_segments
+CALVADOS 3,270,PED00494,19,3.77440176,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,0,6.42742285,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,1,6.52113665,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,2,6.58503605,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,3,6.94481281,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,4,6.82314507,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,5,6.77498790,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,6,6.92937535,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,7,6.54610027,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,8,7.03316015,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,9,6.97074709,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,10,6.80353706,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,11,6.86459075,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,12,6.57578000,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,13,7.10016367,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,14,7.03628569,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,15,6.90946704,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,16,6.90295132,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,17,6.34747172,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,18,6.84504262,merged_dcd_20_segments
+CALVADOS 3,457,PED00183,19,6.76409742,merged_dcd_20_segments
