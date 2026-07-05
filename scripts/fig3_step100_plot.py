@@ -17,6 +17,7 @@ Style: Arial 16/18 pt, 600 DPI, colorblind-safe palette, top/right spines off.
 Panel labels omitted (added in manuscript layout).
 """
 import os, sys
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -24,9 +25,11 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 
-PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
+PROJECT = Path(__file__).resolve().parents[1]
 OUT = os.path.join(PROJECT, 'logs/figure3_step100')
 FIG2_OUT = os.path.join(PROJECT, 'logs/figure2_step100')
+FIGDIR = os.path.join(PROJECT, 'figures')
+os.makedirs(FIGDIR, exist_ok=True)
 
 # Colorblind-safe palette (Wong, 2011)
 C_PED_REF    = '#0072B2'   # Blue — PED reference / ground truth
@@ -197,6 +200,8 @@ def main_figure():
     fig.tight_layout()
     fig.savefig(os.path.join(OUT, 'figure3.png'), dpi=600, bbox_inches='tight')
     fig.savefig(os.path.join(OUT, 'figure3.pdf'), dpi=600, bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure3.png'), dpi=600, bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure3.pdf'), dpi=600, bbox_inches='tight')
     plt.close(fig)
     print('  Main figure saved (2x2, 4 panels A-D)')
 
@@ -317,8 +322,10 @@ def supp_figure():
             ax.tick_params(axis='both', labelsize=11)
 
     fig.tight_layout()
-    fig.savefig(os.path.join(OUT, 'figure_s2.png'), dpi=600, bbox_inches='tight')
-    fig.savefig(os.path.join(OUT, 'figure_s2.pdf'), dpi=600, bbox_inches='tight')
+    fig.savefig(os.path.join(OUT, 'figure_s3.png'), dpi=600, bbox_inches='tight')
+    fig.savefig(os.path.join(OUT, 'figure_s3.pdf'), dpi=600, bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure_s3.png'), dpi=600, bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure_s3.pdf'), dpi=600, bbox_inches='tight')
     plt.close(fig)
     print('  Supplementary figure saved (3x2, 6 panels A-F)')
 

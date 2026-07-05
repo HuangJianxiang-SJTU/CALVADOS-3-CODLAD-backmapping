@@ -248,12 +248,14 @@ def main():
                  fontsize=12.5, fontweight="bold")
     fig.tight_layout(rect=[0, 0, 1, 0.975])
 
-    out_png = "manuscript/figures/phase_diagram_CG_ergodicity_rebuttal.png"
-    out_svg = "manuscript/figures/phase_diagram_CG_ergodicity_rebuttal.svg"
+    out_png = "manuscript/figures/figure_s7_cg_forcefield_ergodicity.png"
+    out_svg = "manuscript/figures/figure_s7_cg_forcefield_ergodicity.svg"
+    out_pdf = "manuscript/figures/figure_s7_cg_forcefield_ergodicity.pdf"
     os.makedirs(os.path.dirname(out_png), exist_ok=True)
     fig.savefig(out_png, dpi=400, bbox_inches="tight", facecolor="white")
     fig.savefig(out_svg, bbox_inches="tight", facecolor="white")
-    print(f"saved {out_png} and {out_svg}")
+    fig.savefig(out_pdf, bbox_inches="tight", facecolor="white")
+    print(f"saved {out_png}, {out_svg}, and {out_pdf}")
 
     print(f"\n{'model':<11}{'N':<6}{'nrep':<6}{'D(N)':<8}{'SE_D':<8}")
     for model in ["MOFF2", "Mpipi", "COCOMO2", "CALVADOS 3"]:

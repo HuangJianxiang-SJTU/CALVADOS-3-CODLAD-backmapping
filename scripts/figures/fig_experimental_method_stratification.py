@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 ROOT = Path(__file__).resolve().parents[2]
-OUT_FIG = ROOT / "manuscript" / "figures" / "experimental_method_stratification_rebuttal"
+OUT_FIG = ROOT / "manuscript" / "figures" / "figure_s1_experimental_method_stratification"
 OUT_TABLE = ROOT / "manuscript" / "tables" / "experimental_method_stratification_summary.csv"
 OUT_ANNOT = ROOT / "manuscript" / "tables" / "ped_experimental_method_annotation.csv"
 
@@ -128,9 +128,9 @@ for ax, (col, ylabel, panel) in zip(axes.ravel(), plot_metrics):
     for spine in ["top", "right"]:
         ax.spines[spine].set_visible(False)
 fig.suptitle("Reconstruction and PED-reference metrics stratified by ensemble provenance", fontsize=12)
-for ext in ["png", "svg"]:
+for ext in ["png", "svg", "pdf"]:
     fig.savefig(f"{OUT_FIG}.{ext}", dpi=300)
 print(f"Wrote {OUT_ANNOT}")
 print(f"Wrote {OUT_TABLE}")
-print(f"Wrote {OUT_FIG}.png/.svg")
+print(f"Wrote {OUT_FIG}.png/.svg/.pdf")
 print(summary.pivot(index="experimental_group", columns="metric", values="mean").round(3).to_string())

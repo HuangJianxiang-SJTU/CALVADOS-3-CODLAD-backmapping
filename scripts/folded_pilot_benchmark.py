@@ -3,7 +3,7 @@
 import os, sys, pickle, gc, argparse
 from pathlib import Path
 
-PROJECT = Path('/MDdata/data04/jxhuang/cg_cascade')
+PROJECT = Path(__file__).resolve().parents[1]
 os.chdir(PROJECT)
 sys.path.insert(0, str(PROJECT / 'scripts'))
 sys.path.insert(0, str(PROJECT / 'src/CODLAD'))
@@ -13,11 +13,17 @@ sys.path.insert(0, str(PROJECT / 'src/cascade_codlad/eval_ensemble'))
 import numpy as np
 import pandas as pd
 import mdtraj as md
-import torch
+try:
+    import torch
+except ImportError:
+    torch = None
 import matplotlib; matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-import fig3_step100_worker as w
+try:
+    import fig3_step100_worker as w
+except ImportError:
+    w = None
 
 ZEN = PROJECT / 'data/raw_benchmark/_2024_Cao_CALVADOSCOM_Zenodo'
 CODLAD_CKPT = PROJECT / 'legacy/misc/results-codlad'
@@ -29,9 +35,10 @@ TABDIR = PROJECT / 'manuscript/tables'
 for p in [OUT, CACHE, TMP, FIGDIR, TABDIR]:
     p.mkdir(parents=True, exist_ok=True)
 
-w.TMP = str(TMP)
-w.CACHE = str(CACHE)
-w.OUT = str(OUT)
+if w is not None:
+    w.TMP = str(TMP)
+    w.CACHE = str(CACHE)
+    w.OUT = str(OUT)
 
 SYSTEMS = {
     'Ubq2': {
@@ -311,8 +318,8 @@ def plot(decomp):
                for k in ['Folded reference', 'Reference+CODLAD', 'Restrained CG+CODLAD']]
     fig.legend(handles=handles, frameon=False, fontsize=8, loc='lower center',
                ncol=3, bbox_to_anchor=(0.5, -0.03))
-    for ext in ['png', 'svg']:
-        fig.savefig(FIGDIR / f'folded_pilot_rebuttal.{ext}', dpi=300, bbox_inches='tight')
+    for ext in ['png', 'svg', 'pdf']:
+        fig.savefig(FIGDIR / f'figure_s8_folded_pilot.{ext}', dpi=300, bbox_inches='tight')
 
 
 def main():
@@ -320,7 +327,20 @@ def main():
     parser.add_argument('--systems', default='Ubq2,Gal3')
     parser.add_argument('--n-frames', type=int, default=20)
     parser.add_argument('--gpu', type=int, default=0)
+    parser.add_argument('--plot-only', action='store_true',
+                        help='Regenerate Figure S8 from the committed summary CSV without rerunning CODLAD.')
     args = parser.parse_args()
+    if args.plot_only:
+        summary = pd.read_csv(OUT / 'folded_pilot_per_condition_summary.csv')
+        decomp = decomposition(summary)
+        decomp.to_csv(TABDIR / 'folded_pilot_decomposition_rebuttal.csv', index=False)
+        plot(decomp)
+        print(f'wrote {FIGDIR}/figure_s8_folded_pilot.png/.svg/.pdf')
+        return
+    if torch is None:
+        raise RuntimeError('PyTorch is required unless --plot-only is used.')
+    if w is None:
+        raise RuntimeError('fig3_step100_worker.py and its dependencies are required unless --plot-only is used.')
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu)
     device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
     print('device', device, 'systems', args.systems, 'n_frames', args.n_frames, flush=True)

@@ -14,15 +14,20 @@ Generates:
   - figure_PED_vs_Dunbrack.png (if Dunbrack data available)
 """
 import os, sys, warnings, time, pickle
+from pathlib import Path
 warnings.filterwarnings("ignore")
 
-os.chdir('/MDdata/data04/jxhuang/cg_cascade')
+PROJECT = Path(__file__).resolve().parents[1]
+os.chdir(PROJECT)
 sys.path.insert(0, 'src/cascade_codlad/eval_ensemble')
 
 import numpy as np, pandas as pd
+import numpy.core as _np_core
 import mdtraj as md
 from collections import defaultdict
 from metrics_ramachandran import _in_boxes, _get_region_boxes
+
+sys.modules.setdefault('numpy._core', _np_core)
 
 _PHI_PSI_GRID_N = 36
 _PHI_PSI_GRID_RANGE = (-180.0, 180.0)
@@ -47,11 +52,12 @@ def compute_phi_psi_divergence(phi_pred, psi_pred, phi_ref, psi_ref):
     js = 0.5 * np.sum(p * np.log(p / m)) + 0.5 * np.sum(q * np.log(q / m))
     return {'js_divergence': float(js)}
 
-PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
 OUT = os.path.join(PROJECT, 'logs/figure3_step100')
+FIGDIR = os.path.join(PROJECT, 'figures')
 FIG2_CACHE = os.path.join(PROJECT, 'logs/figure2_step100/cache')
 FIG3_CACHE = os.path.join(PROJECT, 'logs/figure3_step100/cache')
 CONTOUR_DIR = os.path.join(PROJECT, 'a_rama')
+os.makedirs(FIGDIR, exist_ok=True)
 
 os.makedirs(OUT, exist_ok=True)
 
@@ -447,10 +453,12 @@ for row_idx, (cond_name, df_cond) in enumerate(conditions):
 
 fig.tight_layout()
 
-png_path = os.path.join(OUT, 'figure_s3.png')
-pdf_path = os.path.join(OUT, 'figure_s3.pdf')
+png_path = os.path.join(OUT, 'figure_s4.png')
+pdf_path = os.path.join(OUT, 'figure_s4.pdf')
 fig.savefig(png_path, bbox_inches='tight', dpi=600)
 fig.savefig(pdf_path, bbox_inches='tight', dpi=600)
+fig.savefig(os.path.join(FIGDIR, 'figure_s4.png'), bbox_inches='tight', dpi=600)
+fig.savefig(os.path.join(FIGDIR, 'figure_s4.pdf'), bbox_inches='tight', dpi=600)
 plt.close(fig)
 print(f'Saved: {png_path}')
 print(f'Saved: {pdf_path}')

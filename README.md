@@ -1,243 +1,129 @@
 # CALVADOS-3 / CODLAD Backmapping Pipeline
 
-Reproducible figure generation for the manuscript *"Local Geometry Recovers but Cooperative Structure Does Not: Residue-Resolved Limits of All-Atom Reconstruction from Single-Bead Coarse-Grained Disordered Protein Ensembles"*.
+This repository contains the analysis scripts, processed tables, cached reconstruction data, and final figure outputs for the manuscript *"Local Geometry Recovers but Cooperative Structure Does Not: Residue-Resolved Limits of All-Atom Reconstruction from Single-Bead Coarse-Grained Disordered Protein Ensembles"*.
 
-This repository contains plotting scripts, data-processing scripts, intermediate CSVs, cached
-backmapped conformations, and the final manuscript figure PDFs. All figures can be regenerated
-from the provided inputs by running the processing and plotting scripts in the order described
-below.
+The repository was updated for the JCIM revision so that figure filenames follow the final manuscript and Supplementary Information numbering. In particular, the new PED provenance analysis is Supplementary Figure S1; the original supplementary figures are therefore shifted to S2-S5; the reviewer-requested extension figures are S6-S8.
 
----
+## Quick Figure Map
+
+Use this table to locate each final figure, the script that generates it, and the main input tables. Files under `figures/` are the original manuscript figure set. Files under `manuscript/figures/` are revision/rebuttal additions.
+
+| Final figure | Output file(s) | Generator script | Main inputs |
+|---|---|---|---|
+| Figure 2 | `figures/figure2.pdf` | `scripts/fig2_step100_plot.py` | `logs/figure2_step100/*.csv` |
+| Figure 3 | `figures/figure3.pdf` | `scripts/fig3_step100_plot.py` | `logs/figure3_step100/*.csv` |
+| Figure 4 | `figures/figure4.pdf` | `scripts/fig4_step100_plot.py` | `logs/figure4_step100/*.csv` |
+| Figure 5 | `figures/figure5_radar.pdf` | `scripts/figure5.py` | hard-coded normalized values from the final summaries |
+| Figure S1 | `manuscript/figures/figure_s1_experimental_method_stratification.{png,svg,pdf}` | `scripts/figures/fig_experimental_method_stratification.py` | `data/processed/cascade/ped_candidates/ped_full_inventory.csv`, `logs/figure2_step100/per_system_summary.csv`, `logs/figure3_step100/per_system_summary.csv` |
+| Figure S2 | `figures/figure_s2.pdf` | `scripts/fig2_step100_plot.py` | `logs/figure2_step100/*.csv` |
+| Figure S3 | `figures/figure_s3.pdf` | `scripts/fig3_step100_plot.py` | `logs/figure3_step100/*.csv` |
+| Figure S4 | `figures/figure_s4.pdf` | `scripts/figS3_rama_divergence_compute.py` | Ramachandran point cache or the original Figure 2/Figure 3 reconstruction caches |
+| Figure S5 | `figures/figure_s5.pdf` | `scripts/fig4_step100_plot.py` | `logs/figure4_step100/*.csv` |
+| Figure S6 | `manuscript/figures/figure_s6_pulchra_vs_codlad.{png,svg,pdf}` | `scripts/figures/fig_pulchra_vs_codlad.py` | `logs/pulchra_ped/per_system_summary.csv`, `logs/pulchra_cg/per_system_summary.csv`, CODLAD summary CSVs |
+| Figure S7 | `manuscript/figures/figure_s7_cg_forcefield_ergodicity.{png,svg,pdf}` | `scripts/aim1_cg_sampling/cocomo/plot_ergodicity_phase_diagram.py` | `manuscript/tables/cg_forcefield_ergodicity_summary_rebuttal.csv`, clock JSON files under `dataset/cg_simulations_{moff2,mpipi,cocomo2}/` |
+| Figure S8 | `manuscript/figures/figure_s8_folded_pilot.{png,svg,pdf}` | `scripts/folded_pilot_benchmark.py` | `logs/folded_pilot_rebuttal/folded_pilot_per_condition_summary.csv` |
+| Response-only clash analysis | `manuscript/figures/clash_length_compactness_rebuttal.{png,svg}` | `scripts/figures/fig_clash_length_compactness_rebuttal.py` | `manuscript/tables/clash_length_compactness_rebuttal.csv` |
+
+## Table Map
+
+| File | Used for | Description |
+|---|---|---|
+| `manuscript/tables/ped_experimental_method_annotation.csv` | Figure S1 / Table S1 | Per-system PED provenance annotation used in the revised SI dataset table. |
+| `manuscript/tables/experimental_method_stratification_summary.csv` | Figure S1 | Grouped summary of reconstruction/reference metrics by PED provenance class. |
+| `manuscript/tables/pulchra_vs_codlad_summary.csv` | Figure S6 | Summary metrics comparing CODLAD and PULCHRA under PED-derived and CALVADOS-derived C-alpha input. |
+| `manuscript/tables/cg_forcefield_ergodicity_summary_rebuttal.csv` | Figure S7 | Per-replica late-window mean Rg values for MOFF2, Mpipi, COCOMO2, and CALVADOS 3. |
+| `manuscript/tables/folded_pilot_decomposition_rebuttal.csv` | Figure S8 / response text | Folded-domain pilot decomposition values for Ubq2 and Gal3. |
+| `manuscript/tables/clash_length_compactness_rebuttal.csv` | Response-only clash analysis | Per-system clash, length, and compactness values. |
+| `manuscript/tables/clash_length_compactness_stats.csv` | Response-only clash analysis | Correlation statistics for clash count versus length/compactness. |
 
 ## Repository Structure
 
-```
+```text
 CALVADOS-3-CODLAD-backmapping/
-├── README.md
-├── scripts/                        # 5 plotting scripts → figures/
-├── processing_scripts/             # 4 data-pipeline scripts → logs/
-├── figures/                        # 8 final manuscript figure PDFs
-├── dataset/                        # Cleaned system list
-│   └── clean_v5.csv
-└── logs/
-    ├── figure2_step100/            # 4 input CSVs for Figure 2
-    ├── figure3_step100/            # 3 input CSVs + ~25,000 cached NPZ/pkl frames
-    ├── figure4/                    # 2 reference CSVs (step=5 legacy data)
-    └── figure4_step100/            # 5 input CSVs for Figure 4
+├── dataset/
+│   ├── clean_v5.csv
+│   └── cg_simulations_{moff2,mpipi,cocomo2}/   # lightweight clock JSONs for Figure S7
+├── data/processed/cascade/ped_candidates/
+│   └── ped_full_inventory.csv                  # PED inventory used for Figure S1 annotations
+├── figures/                                    # final main figures and shifted SI Figures S2-S5
+├── logs/                                       # processed metric tables and selected caches
+├── manuscript/
+│   ├── figures/                                # revision/rebuttal figures S1 and S6-S8
+│   └── tables/                                 # revision/rebuttal summary tables
+├── scripts/                                    # main figure and metric scripts
+│   ├── aim1_cg_sampling/                       # alternative CG force-field scripts
+│   ├── figures/                                # revision/rebuttal plotting scripts
+│   └── pulchra_backmapping/                    # PULCHRA runner and metric scorer
+└── src/pulchra/src_euplotes/                   # PULCHRA source used for the classical backmapper comparison
 ```
 
----
+## Main Analysis Scripts
 
-## File Inventory
+| Script | Role |
+|---|---|
+| `scripts/fig2_step100_worker.py` | CODLAD reconstruction from PED C-alpha traces. |
+| `scripts/fig2_step100_merge.py` | Aggregates PED-to-CODLAD reconstruction metrics. |
+| `scripts/fig2_step100_plot.py` | Generates Figure 2 and final Supplementary Figure S2. |
+| `scripts/fig3_step100_worker.py` | CODLAD reconstruction from CALVADOS C-alpha trajectories. |
+| `scripts/fig3_step100_recompute_metrics.py` | Recomputes structural metrics from cached CG-to-CODLAD frames. |
+| `scripts/fig3_step100_recompute_clash_fast.py` | KDTree-based clash recomputation used to correct the CG-to-CODLAD clash column. |
+| `scripts/fig3_step100_merge.py` | Aggregates CG-to-CODLAD metrics and three-condition summary tables. |
+| `scripts/fig3_step100_plot.py` | Generates Figure 3 and final Supplementary Figure S3. |
+| `scripts/figS3_rama_divergence_compute.py` | Generates final Supplementary Figure S4 and Ramachandran JS-divergence tables. |
+| `scripts/fig4_step100_production.py` | Computes per-residue helix profiles. |
+| `scripts/fig4_step100_plot.py` | Generates Figure 4 and final Supplementary Figure S5. |
+| `scripts/figure5.py` | Generates Figure 5 radar summary. |
 
-### `scripts/` — Plotting Scripts
+## Revision and Rebuttal Scripts
 
-These scripts read processed CSVs from `logs/` and generate the figure PDFs in `figures/`.
-Run them in any order after the data pipeline has completed.
+| Script | Output | Notes |
+|---|---|---|
+| `scripts/figures/fig_experimental_method_stratification.py` | Figure S1 and Table S1-related CSVs | Stratifies PED reference and reconstruction metrics by NMR-supported, SAXS-only, EPR/DEER, and idpGAN/CG-derived provenance. |
+| `scripts/pulchra_backmapping/run_pulchra.py` | PULCHRA reconstruction caches | Runs PULCHRA on the same PED-derived and CALVADOS-derived C-alpha inputs used for CODLAD. |
+| `scripts/pulchra_backmapping/recompute_metrics.py` | `logs/pulchra_{ped,cg}/per_system_summary.csv` | Scores PULCHRA outputs with the same metric definitions used for CODLAD. |
+| `scripts/figures/fig_pulchra_vs_codlad.py` | Figure S6 | Compares CODLAD and PULCHRA across rotamers, C-beta deviation, clashes, helix fraction, Ramachandran favored percentage, and trans-Pro phi. |
+| `scripts/aim1_cg_sampling/openabc/*.py` | Alternative-CG sampling helpers | Used for Mpipi and MOFF2 feasibility runs. |
+| `scripts/aim1_cg_sampling/cocomo/*.py` | COCOMO2 sampling and Figure S7 plotting | Figure S7 uses committed summary values plus lightweight clock JSONs; large trajectories are not required. |
+| `scripts/folded_pilot_benchmark.py` | Figure S8 and folded pilot tables | Runs or summarizes the Ubq2/Gal3 folded-domain contrast benchmark. |
+| `scripts/figures/fig_clash_length_compactness_rebuttal.py` | Response-only clash analysis | Assesses how Figure 2D clash count depends on chain length and compactness. |
 
-| Script | Output | Description |
-|--------|--------|-------------|
-| `fig2_step100_plot.py` | `figure2.pdf`, `figure_s1.pdf` | All-atom reconstruction quality (2×2 main + 4×2 supp) |
-| `fig3_step100_plot.py` | `figure3.pdf`, `figure_s2.pdf` | CG-conditioned reconstruction fidelity (2×2 main + 3×2 supp) |
-| `fig4_step100_plot.py` | `figure4.pdf`, `figure_s4.pdf` | Per-residue helix recovery (5-stack main + 2×2 supp) |
-| `figS3_rama_divergence_compute.py` | `figure_s3.pdf` | Ramachandran density divergence (3×6 grid) |
-| `figure5.py` | `figure5_radar.pdf` | Three-condition radar summary |
+## Reproduction
 
-### `processing_scripts/` — Data Pipeline Scripts
+All commands assume the repository root as the working directory. The processed CSVs and submitted figures are already committed, so readers can regenerate individual figures directly if the required Python environment is available.
 
-These scripts generate the CSV files consumed by the plotting scripts. Run them **in order**
-(see Reproduction Workflow below).
-
-| Script | Outputs | Depends on |
-|--------|---------|------------|
-| `fig2_step100_merge.py` | `logs/figure2_step100/*.csv` | `dataset/clean_v5.csv` |
-| `fig3_step100_recompute_metrics.py` | `logs/figure3_step100/per_frame_metrics.csv` | `logs/figure3_step100/cache/*.npz` |
-| `fig3_step100_merge.py` | `logs/figure3_step100/per_system_summary.csv`, `rama_three_way.csv`, `rama_by_class.csv`, `bond_geometry.csv`, `three_condition_decomposition.csv` | `dataset/clean_v5.csv`, `logs/figure3_step100/per_frame_metrics.csv`, `logs/figure2_step100/*.csv` |
-| `fig4_step100_production.py` | `logs/figure4_step100/*.csv` | `logs/figure3_step100/cache/*.npz`, `logs/figure4/*.csv` |
-
-### `dataset/` — System List
-
-| File | Description |
-|------|-------------|
-| `clean_v5.csv` | Curated list of 23 PED systems used across all figures. Columns include PED identifier, protein name, sequence length, and validation flags. |
-
-### `figures/` — Final Manuscript Figures
-
-| File | Layout | Description |
-|------|--------|-------------|
-| `figure2.pdf` | 2×2 (A–D) | All-atom reconstruction quality: SC RMSD, Rg scatter, rotamer bars, clash counts |
-| `figure3.pdf` | 2×2 (A–D) | CG-conditioned fidelity: Rg overlay, JS divergence, rotamer three-way, clash three-way |
-| `figure4.pdf` | 5-stack (A1–A5) | Per-residue helix profiles across 5 systems with PED ground truth |
-| `figure_s1.pdf` | 4×2 (A–H) | Figure 2 supplementary: Dmax, AA/BB/SC RMSD, SC/BB ratio, Cβ scatter, helix scatter, bond violins |
-| `figure_s2.pdf` | 3×2 (A–F) | Figure 3 supplementary: bond violins, Cβ deviation, Dmax overlay, Pro φ, Trans-Pro, helix fraction |
-| `figure_s3.pdf` | 3×6 grid | Ramachandran six-class, three-condition density divergence |
-| `figure_s4.pdf` | 2×2 (A–D) | Figure 4 supplementary: Tif2 NRID zoom, ACTR zoom, p15PAF zoom, step comparison |
-| `figure5_radar.pdf` | Radar | Three-condition aggregate summary (PED ref / PED+CODLAD / CG+CODLAD) |
-
-### `logs/` — Intermediate Data and Cached Computations
-
-#### `logs/figure2_step100/` — Figure 2 Inputs
-
-| File | Rows | Description |
-|------|------|-------------|
-| `per_conformer_metrics.csv` | 4,156 | Per-conformer Rg, Dmax, RMSD, clash, Rama, rotamer metrics |
-| `per_system_summary.csv` | 23 | Per-system mean metrics and standard deviations |
-| `per_residue_type_sc_rmsd.csv` | 20 | Mean side-chain RMSD per amino acid type |
-| `bond_geometry.csv` | 69 | Mean bond lengths (CA–C, N–CA, C–N) per system |
-
-#### `logs/figure3_step100/` — Figure 3 Inputs & Cache
-
-| File | Rows | Description |
-|------|------|-------------|
-| `per_frame_metrics.csv` | 12,500 | Per-CG-frame metrics (Rg, Dmax, Cα/Cβ deviation, bond geometry, Rama, rotamer, DSSP, clash) across 23 systems |
-| `per_system_summary.csv` | 23 | Per-system means aggregated across CG frames |
-| `rama_three_way.csv` | 6 | Ramachandran favoured percentages for three-condition comparison |
-| `cache/*.npz` + `*_top.pkl` | ~25,000 files, 1.2 GB | Cached backmapped all-atom coordinates and topologies for every 8th CG frame. **Including these files allows skipping the expensive backmapping recomputation step.** |
-
-#### `logs/figure4/` — Figure 4 Reference Data (Legacy Step=5)
-
-| File | Description |
-|------|-------------|
-| `figure4_per_residue_helix_combined.csv` | Per-residue reference helix fractions from step=5 PED DSSP |
-| `figure4_per_ref_helix_summary.csv` | Per-system summary of step=5 helix predictions |
-
-#### `logs/figure4_step100/` — Figure 4 Inputs
-
-| File | Rows | Description |
-|------|------|-------------|
-| `per_residue_helix.csv` | 533 | Per-residue DSSP helix fractions (step=100) with reference values |
-| `per_system_summary.csv` | 5 | Per-system Pearson r, mean helix %, step comparison |
-| `p15PAF_zoom.csv` | 7 | p15PAF residues 54–60 zoom data |
-| `ACTR_zoom.csv` | 30 | ACTR N-terminal helix zoom data |
-| `PED00184_zoom.csv` | 21 | Tif2 NRID residues 120–140 zoom data |
-
----
-
-
-### Revision and Rebuttal Additions
-
-The revised JCIM response adds reproducibility assets beyond the original five main/supplementary plotting scripts. New rebuttal figures and tables are stored under `manuscript/figures/` and `manuscript/tables/`, with generation scripts in `scripts/figures/`, `scripts/pulchra_backmapping/`, `scripts/aim1_cg_sampling/`, and `scripts/folded_pilot_benchmark.py`.
-
-| Output | Script / Data Source | Purpose |
-|--------|----------------------|---------|
-| `manuscript/figures/experimental_method_stratification_rebuttal.*` | `scripts/figures/fig_experimental_method_stratification.py` | Provenance-stratified PED analysis for Supplementary Figure S1 |
-| `manuscript/figures/pulchra_vs_codlad_rebuttal.*` | `scripts/figures/fig_pulchra_vs_codlad.py`; `logs/pulchra_{ped,cg}/per_system_summary.csv` | PULCHRA versus CODLAD reconstruction-method comparison for Supplementary Figure S6 |
-| `manuscript/figures/phase_diagram_CG_ergodicity_rebuttal.*` | `scripts/aim1_cg_sampling/cocomo/plot_ergodicity_phase_diagram.py` | Alternative CG force-field sampling/ergodicity assessment for Supplementary Figure S7 |
-| `manuscript/figures/folded_pilot_rebuttal.*` | `scripts/folded_pilot_benchmark.py`; `logs/folded_pilot_rebuttal/folded_pilot_per_condition_summary.csv` | Folded-domain pilot benchmark for Supplementary Figure S8 |
-| `manuscript/figures/clash_length_compactness_rebuttal.*` | `scripts/figures/fig_clash_length_compactness_rebuttal.py` | Chain-length/compactness dependence of clash counts |
-
-The PULCHRA source archive and source files used for the classical backmapping comparison are included under `src/pulchra/`. OpenABC/Mpipi/MOFF2 and COCOMO2 helper scripts used for the alternative-CG feasibility assessment are included under `scripts/aim1_cg_sampling/`. Large trajectory products and full PULCHRA per-frame caches are not committed; the committed summary CSVs are sufficient to regenerate the submitted rebuttal figures.
-
----
-
-## Reproduction Workflow
-
-All commands assume the repository root as the working directory. Scripts reference paths via a
-`PROJECT` variable pointing to the repository root; update it inside each script if you clone
-to a different location.
-
-### Step 1: Generate Figure 2 intermediate data
-
-```bash
-python processing_scripts/fig2_step100_merge.py
-```
-
-**Inputs:** `dataset/clean_v5.csv`.
-**Outputs:** `logs/figure2_step100/` — `per_conformer_metrics.csv`, `per_system_summary.csv`,
-`per_residue_type_sc_rmsd.csv`, `bond_geometry.csv`.
-
-### Step 2: Generate Figure 3 intermediate data
-
-The cached NPZ frames in `logs/figure3_step100/cache/` provide pre-computed backmapped
-coordinates. Use them to skip the expensive backmapping inference step:
-
-```bash
-python processing_scripts/fig3_step100_recompute_metrics.py
-python processing_scripts/fig3_step100_merge.py
-```
-
-**Inputs:** `dataset/clean_v5.csv`, `logs/figure3_step100/cache/`, `logs/figure2_step100/`.
-**Outputs:** `logs/figure3_step100/` — `per_frame_metrics.csv`, `per_system_summary.csv`,
-`rama_three_way.csv`, `rama_by_class.csv`, `bond_geometry.csv`, `three_condition_decomposition.csv`.
-
-### Step 3: Generate Figure 4 intermediate data
-
-```bash
-python processing_scripts/fig4_step100_production.py
-```
-
-**Inputs:** `logs/figure3_step100/cache/`, `logs/figure4/`.
-**Outputs:** `logs/figure4_step100/` — `per_residue_helix.csv`, `per_system_summary.csv`,
-`p15PAF_zoom.csv`, `ACTR_zoom.csv`, `PED00184_zoom.csv`.
-
-### Step 4: Generate all figures
+Generate the main figures and shifted original supplementary figures:
 
 ```bash
 python scripts/fig2_step100_plot.py
 python scripts/fig3_step100_plot.py
-python scripts/fig4_step100_plot.py
 python scripts/figS3_rama_divergence_compute.py
+python scripts/fig4_step100_plot.py
 python scripts/figure5.py
 ```
 
-**Outputs:** All 8 PDFs in `figures/`.
+Figure S4 is a density-panel figure rather than a summary-table plot. Regenerating it from scratch requires either the original Figure 2/Figure 3 reconstruction caches or the precomputed Ramachandran point cache used during revision. The final submitted `figures/figure_s4.pdf` is committed directly.
 
-### Dependency Chain Summary
+Generate the revision/rebuttal figures:
 
-```
-dataset/clean_v5.csv
-    │
-    ├─► processing_scripts/fig2_step100_merge.py ──► logs/figure2_step100/
-    │
-    ├─► logs/figure3_step100/cache/ (pre-computed, 25,000 files)
-    │       │
-    │       ├─► processing_scripts/fig3_step100_recompute_metrics.py
-    │       │       └─► logs/figure3_step100/per_frame_metrics.csv
-    │       │
-    │       ├─► processing_scripts/fig3_step100_merge.py
-    │       │       └─► logs/figure3_step100/ (summary CSVs)
-    │       │
-    │       └─► processing_scripts/fig4_step100_production.py
-    │               └─► logs/figure4_step100/
-    │
-    └─► scripts/*.py ──► figures/*.pdf
+```bash
+python scripts/figures/fig_experimental_method_stratification.py
+python scripts/figures/fig_pulchra_vs_codlad.py
+python scripts/aim1_cg_sampling/cocomo/plot_ergodicity_phase_diagram.py
+python scripts/folded_pilot_benchmark.py --plot-only
+python scripts/figures/fig_clash_length_compactness_rebuttal.py
 ```
 
----
+The full CODLAD and folded-pilot reconstruction workflows require the original local CODLAD/CALVADOS environments and checkpoint/data paths used in the study. For reproducibility of the submitted revision figures, the repository includes the processed summary CSVs used by the plotting scripts. `scripts/folded_pilot_benchmark.py --plot-only` regenerates Figure S8 from the committed folded-pilot summary table. Large trajectory products and full PULCHRA per-frame caches are intentionally not committed.
 
 ## Dependencies
 
-The scripts require Python 3.8+ with the following packages. Check individual script imports
-for exact version requirements.
+The plotting scripts use Python 3 with NumPy, Pandas, Matplotlib, and SciPy. Metric recomputation and reconstruction scripts additionally use MDTraj, OpenMM/PDBFixer, PyTorch, CODLAD, CALVADOS, and model-specific CG packages as indicated by the script imports.
 
-| Package | Used by | Purpose |
-|---------|---------|---------|
-| NumPy | all scripts | Numerical arrays |
-| Pandas | all scripts | Tabular data I/O |
-| Matplotlib | plotting scripts | Figure generation |
-| SciPy | `fig3_step100_plot.py` | KS test |
-| MDTraj | processing scripts | Trajectory I/O, DSSP, Ramachandran |
-| OpenMM / PDBFixer | `fig4_step100_production.py` | Hydrogen placement for DSSP |
-
-Install the core stack:
-
-```bash
-pip install numpy pandas matplotlib scipy mdtraj
-```
-
-OpenMM and PDBFixer are only required for `fig4_step100_production.py`; all other scripts
-run without them.
-
----
+A lightweight OpenABC environment file used for the alternative-CG runs is provided at `envs/openabc.yaml`.
 
 ## Citation
 
-This repository accompanies the CALVADOS-3 / CODLAD backmapping manuscript. If you use this
-code or data, please cite:
-
-> *[Manuscript citation — DOI placeholder]*
-
----
+This repository accompanies the CALVADOS-3 / CODLAD backmapping manuscript. If you use this code or data, please cite the manuscript once the final citation is available.
 
 ## Contact
 

@@ -20,6 +20,7 @@ Style: Helvetica 18/16 pt, 600 DPI, top/right spines off.
 Panel labels omitted (added in manuscript layout).
 """
 import os, sys
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -27,8 +28,10 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator
 
-PROJECT = '/MDdata/data04/jxhuang/cg_cascade'
+PROJECT = Path(__file__).resolve().parents[1]
 OUT = os.path.join(PROJECT, 'logs/figure2_step100')
+FIGDIR = os.path.join(PROJECT, 'figures')
+os.makedirs(FIGDIR, exist_ok=True)
 
 plt.rcParams.update({
     'font.family':        'sans-serif',
@@ -161,6 +164,8 @@ def plot_main_figure(df, summary, sc_type):
     fig.tight_layout()
     fig.savefig(os.path.join(OUT, 'figure2.png'), bbox_inches='tight')
     fig.savefig(os.path.join(OUT, 'figure2.pdf'), bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure2.png'), bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure2.pdf'), bbox_inches='tight')
     plt.close(fig)
     print('  Main figure saved (2x2, equal width, 4 panels A-D)')
 
@@ -271,8 +276,10 @@ def plot_supplementary(df, summary, bond):
         ax.tick_params(axis='both', labelsize=11)
 
     fig.tight_layout()
-    fig.savefig(os.path.join(OUT, 'figure_s1.png'), bbox_inches='tight')
-    fig.savefig(os.path.join(OUT, 'figure_s1.pdf'), bbox_inches='tight')
+    fig.savefig(os.path.join(OUT, 'figure_s2.png'), bbox_inches='tight')
+    fig.savefig(os.path.join(OUT, 'figure_s2.pdf'), bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure_s2.png'), bbox_inches='tight')
+    fig.savefig(os.path.join(FIGDIR, 'figure_s2.pdf'), bbox_inches='tight')
     plt.close(fig)
     print('  Supplementary figure saved (4x2 portrait, 8 panels A-H)')
 

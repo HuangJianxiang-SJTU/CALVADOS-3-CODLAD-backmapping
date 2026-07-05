@@ -177,12 +177,11 @@ def plot(summary, main23):
     fig.suptitle(f'Classical PULCHRA versus learned CODLAD backmapping (n={len(main23)} systems)',
                  fontsize=12.5, fontweight='bold', y=0.995)
     fig.tight_layout(rect=[0, 0, 1, 0.965])
-    out_png = PROJECT / 'manuscript/figures/pulchra_vs_codlad_rebuttal.png'
-    out_svg = PROJECT / 'manuscript/figures/pulchra_vs_codlad_rebuttal.svg'
-    fig.savefig(out_png, dpi=400, bbox_inches='tight', facecolor='white')
-    fig.savefig(out_svg, bbox_inches='tight', facecolor='white')
-    print(f'saved {out_png}')
-    print(f'saved {out_svg}')
+    out_base = PROJECT / 'manuscript/figures/figure_s6_pulchra_vs_codlad'
+    for ext in ['png', 'svg', 'pdf']:
+        out = out_base.with_suffix(f'.{ext}')
+        fig.savefig(out, dpi=400, bbox_inches='tight', facecolor='white')
+        print(f'saved {out}')
 
 
 def main():
